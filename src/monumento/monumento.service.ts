@@ -1,15 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateMonumentoDto } from './dto/create-monumento.dto';
 import { UpdateMonumentoDto } from './dto/update-monumento.dto';
+import { Monumento } from './entities/monumento.entity';
 
 @Injectable()
 export class MonumentoService {
+  constructor(
+    @InjectRepository(Monumento)
+    private repo: Repository<Monumento>,
+  ) {}
   create(createMonumentoDto: CreateMonumentoDto) {
-    return 'This action adds a new monumento';
+    return this.repo.save(createMonumentoDto);
   }
 
   findAll() {
-    return `This action returns all monumento`;
+    return this.repo.find();
   }
 
   findOne(id: number) {
