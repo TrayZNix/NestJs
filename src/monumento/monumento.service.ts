@@ -1,4 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Catch,
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateMonumentoDto } from './dto/create-monumento.dto';
@@ -18,9 +24,12 @@ export class MonumentoService {
   findAll() {
     return this.repo.find();
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} monumento`;
+  findOne(id: number): Promise<Monumento> {
+    return this.repo.findOneBy({ id: id }).then((foundMonumento) => {
+      if (foundMonumento == null)
+        throw new HttpException(NotFoundException, HttpStatus.NOT_FOUND);
+      return foundMonumento;
+    });
   }
 
   update(id: number, updateMonumentoDto: UpdateMonumentoDto) {
@@ -28,6 +37,8 @@ export class MonumentoService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} monumento`;
+    return this.repo.findOneBy({ id: id }).then((foundMonumento) => {
+      if (foundMonumento != null) this.repo.delete({ id: id });
+    });
   }
 }
