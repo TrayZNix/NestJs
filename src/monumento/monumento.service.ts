@@ -42,23 +42,27 @@ export class MonumentoService {
     }
   }
 
-  update(
-    id: number,
-    updateMonumentoDto: UpdateMonumentoDto,
-    monumento: Monumento,
-  ) {
-    // if (this.checkIfFieldNull(updateMonumentoDto))
-    //   throw new HttpException(BadRequestException, HttpStatus.BAD_REQUEST);
-    // else {
-    //   monumento.codigoPais = updateMonumentoDto.codigoPais;
-    //   monumento.descripcion = updateMonumentoDto.descripcion;
-    //   monumento.linkFoto = updateMonumentoDto.linkFoto;
-    //   monumento.localizacion = updateMonumentoDto.localizacion;
-    //   monumento.nombreCiudad = updateMonumentoDto.nombreCiudad;
-    //   monumento.nombrePais = updateMonumentoDto.nombrePais;
-    //   monumento.nombreMonumento = updateMonumentoDto.nombreMonumento;
-    //   return this.repo.save(monumento);
-    // }
+  update(id: number, updateMonumentoDto: UpdateMonumentoDto) {
+    if (this.checkIfFieldNull(updateMonumentoDto))
+      throw new HttpException(BadRequestException, HttpStatus.BAD_REQUEST);
+    return this.repo
+      .findOneBy({ id: id })
+      .then((monumento) => {
+        monumento.codigoPais = updateMonumentoDto.codigoPais;
+        monumento.descripcion = updateMonumentoDto.descripcion;
+        monumento.linkFoto = updateMonumentoDto.linkFoto;
+        monumento.localizacion = updateMonumentoDto.localizacion;
+        monumento.nombreCiudad = updateMonumentoDto.nombreCiudad;
+        monumento.nombrePais = updateMonumentoDto.nombrePais;
+        monumento.nombreMonumento = updateMonumentoDto.nombreMonumento;
+        this.repo.save(monumento);
+        if (monumento == null) {
+          throw new HttpException(NotFoundException, HttpStatus.NOT_FOUND);
+        }
+      })
+      .catch((err) => {
+        throw new HttpException(NotFoundException, HttpStatus.NOT_FOUND);
+      });
   }
 
   remove(id: number) {

@@ -40,9 +40,7 @@ export class MonumentoController {
     @Param('id') id: number,
     @Body() updateMonumentoDto: UpdateMonumentoDto,
   ) {
-    this.monumentoService.findOne(id).then((monumento) => {
-      return this.monumentoService.update(+id, updateMonumentoDto, monumento);
-    });
+    return this.monumentoService.update(+id, updateMonumentoDto);
   }
 
   @Delete(':id')
