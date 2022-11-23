@@ -31,21 +31,23 @@ export class MonumentoController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.monumentoService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.monumentoService.findOne(id);
   }
 
   @Put(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateMonumentoDto: UpdateMonumentoDto,
   ) {
-    return this.monumentoService.update(+id, updateMonumentoDto);
+    this.monumentoService.findOne(id).then((monumento) => {
+      return this.monumentoService.update(+id, updateMonumentoDto, monumento);
+    });
   }
 
   @Delete(':id')
   @HttpCode(204)
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.monumentoService.remove(+id);
   }
 }
