@@ -8,11 +8,13 @@ import { MonumentoModule } from './monumento/monumento.module';
 @Module({
   imports: [
     MonumentoModule,
+    //dropSchema: true -> El create-drop de jpa
     TypeOrmModule.forRoot({
+      dropSchema: true,
       type: 'sqlite',
       database: 'test.db',
       entities: [Monumento],
-      synchronize: true, //development only
+      synchronize: true, //Usar solo en development
     }),
   ],
   controllers: [AppController],

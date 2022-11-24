@@ -3,22 +3,21 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
-  BadRequestException,
-  HttpStatus,
-  HttpException,
-  UsePipes,
   HttpCode,
   Put,
+  OnModuleInit,
 } from '@nestjs/common';
 import { MonumentoService } from './monumento.service';
 import { CreateMonumentoDto } from './dto/create-monumento.dto';
 import { UpdateMonumentoDto } from './dto/update-monumento.dto';
 @Controller('monumento')
-export class MonumentoController {
+export class MonumentoController implements OnModuleInit {
   constructor(private readonly monumentoService: MonumentoService) {}
+  onModuleInit() {
+    this.monumentoService.loadMockData();
+  }
 
   @Post()
   create(@Body() createMonumentoDto: CreateMonumentoDto) {
