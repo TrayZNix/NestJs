@@ -12,7 +12,7 @@ import { MonumentoModule } from './monumento/monumento.module';
     TypeOrmModule.forRoot({
       dropSchema: true,
       type: 'sqlite',
-      database: 'test.db',
+      database: 'datos.db',
       entities: [Monumento],
       synchronize: true, //Usar solo en development
     }),
