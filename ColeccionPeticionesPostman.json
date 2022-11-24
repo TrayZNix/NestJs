@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "b388dde3-116d-447b-945c-e36d88fba544",
+		"name": "MonumentosNESTJS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23783434"
+	},
+	"item": [
+		{
+			"name": "getAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/monumento",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"monumento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMonumentoConcreto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/monumento/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"monumento",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postMonument",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigoPais\": \"es\",\r\n    \"nombrePais\": \"Fancia\",\r\n    \"nombreCiudad\": \"Paris\",\r\n    \"localizacion\": \"-38.2315, 3.1231\",\r\n    \"nombreMonumento\": \"Notre Damme\",\r\n    \"descripcion\": \"Notre damme no es...\",\r\n    \"linkFoto\": \"http://www.google.com/images/nottredamme\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/monumento",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"monumento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editMonument",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigoPais\": \"fr\",\r\n    \"nombrePais\": \"Fancia\",\r\n    \"nombreCiudad\": \"Paris\",\r\n    \"localizacion\": \"48.8582351,2.2937611\",\r\n    \"nombreMonumento\": \"Tour Eiffel\",\r\n    \"descripcion\": \"La torre eiffel es...\",\r\n    \"linkFoto\": \"http://www.google.com/images/nottredamme\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/monumento/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"monumento",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMonument",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/monumento/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"monumento",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
